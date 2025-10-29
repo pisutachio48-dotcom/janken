@@ -10,11 +10,43 @@ body{
 #container{
   margin-bottom: 20px;
   margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 } 
 
 #game, #hyoudai{
   display: none;
+
 }
 #hyoudai{
   margin-top: 100px;
 }
+
+#repeat {
+  visibility: hidden;
+}
+
+@keyframes janken-loop {
+  0%   { background-image: url('img/gu.jpg'); }
+  33%  { background-image: url('img/tyoki.jpg'); }
+  66%  { background-image: url('img/pa.jpg'); }
+  100% { background-image: url('img/gu.jpg'); }
+}
+
+#com {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  animation: janken-loop 0.6s infinite;
+}
+
+.player, .player2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+

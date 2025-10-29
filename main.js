@@ -1,7 +1,7 @@
 'use strict';
 {
   const gutyokipa = [
-    1, 2, 3
+    'img/gu.jpg', 'img/tyoki.jpg', 'img/pa.jpg'
   ];
 
   const start = document.querySelector('#start');
@@ -22,78 +22,54 @@
     pa.disabled = true;
   }
 
-  function showComHand() {
-    hand = Math.floor(Math.random() * gutyokipa.length) + 1;
-    if (hand === 1) {
-      com.src = 'img/gu.jpg';
-    } else if (hand === 2) {
-      com.src = 'img/tyoki.jpg';
-    } else if (hand === 3) {
-      com.src = 'img/pa.jpg';
+  function judge(myhandIndex, comhand) {
+    if (myhandIndex === comhand) {
+      return 'あいこ'
     }
+    const win =
+      (myhandIndex === 0 && comhand === 1) ||
+      (myhandIndex === 1 && comhand === 2) ||
+      (myhandIndex === 2 && comhand === 0);
+
+    if (win) {
+      return '勝ち';
+    }
+
+    return '負け'
+  }
+  function playbutton(myhandIndex) {
+    comhand = Math.floor(Math.random() * gutyokipa.length);
+    com.style.animation = 'none';
+    com.style.backgroundImage = `url(${gutyokipa[comhand]})`;
+    my.src = gutyokipa[myhandIndex];
+    shouri.textContent = judge(myhandIndex, comhand);
+    buttonStop();
+    repeat.style.visibility = 'visible'
+      ;
   }
 
-  let timer;
-  let hand;
+  
+  let comhand;
 
   start.addEventListener('click', () => {
     title.style.display = 'none';
-    hyoudai.style.display = ('block');
+    hyoudai.style.display = 'block';
     game.style.display = 'block';
+    repeat.style.visibility = 'hidden'
+  });
 
-    timer = setInterval(() => {
-      showComHand()
-    }, 100);
-  });
-  gu.addEventListener('click', () => {
-    clearInterval(timer);
-    my.src = 'img/gu.jpg';
-    if (hand === 1) {
-      shouri.textContent = 'あいこ';
-    } else if (hand === 2) {
-      shouri.textContent = '勝ち';
-    } else if (hand === 3) {
-      shouri.textContent = '負け';
-    }
-    buttonStop();
-  });
-  tyoki.addEventListener('click', () => {
-    clearInterval(timer);
-    my.src = 'img/tyoki.jpg';
-    if (hand === 1) {
-      shouri.textContent = '負け';
-    } else if (hand === 2) {
-      shouri.textContent = 'あいこ';
-    } else if (hand === 3) {
-      shouri.textContent = '勝ち';
-    }
-    buttonStop();
-  });
-  pa.addEventListener('click', () => {
-    clearInterval(timer);
-    my.src = 'img/pa.jpg';
-    if (hand === 1) {
-      shouri.textContent = '勝ち';
-    } else if (hand === 2) {
-      shouri.textContent = '負け';
-    } else if (hand === 3) {
-      shouri.textContent = 'あいこ';
-    }
-    buttonStop();
-  });
+  gu.addEventListener('click', () => playbutton(0));
+  tyoki.addEventListener('click', () => playbutton(1));
+  pa.addEventListener('click', () => playbutton(2));
 
   repeat.addEventListener('click', () => {
-    // title.style.display = 'none';
-    // hyoudai.style.display = ('block');
-    // game.style.display = 'block';
 
-    timer = setInterval(() => {
-      showComHand()
+    com.style.animation = 'janken-loop 0.6s infinite';
 
-    }, 100);
     gu.disabled = false;
     tyoki.disabled = false;
     pa.disabled = false;
+    repeat.style.visibility = 'hidden'
   });
 
   //  gu.addEventListener('click',()=>{

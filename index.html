@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>じゃんけんゲーム</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  
+
   <div id="title">
     <h1>じゃんけんゲーム</h1>
     <button id="start">スタート</button>
@@ -18,14 +20,27 @@
   </div>
   <div id="game">
     <div id="container">
-      <img src="img/tyoki.jpg" width="100px" alt="" id="com">
-      vs
-     <img src="img/tyoki.jpg" width="100px" alt="" id="my">
+      <div class="player">
+        <p>com</p>
+        <div id="com"></div>
+      </div>
+
+      <p class="vs">VS</p>
+      <div class="player2">
+        <p>自分</p>
+        <div>
+          <img src="img/tyoki.jpg" width="100px" alt="" id="my">
+        </div>
+      </div>
+
     </div>
-    <button id="gu">グー</button>
-    <button id="tyoki">チョキ</button>
-    <button id="pa">パー</button>
+    <div id="maibutton">
+      <button id="gu">グー</button>
+      <button id="tyoki">チョキ</button>
+      <button id="pa">パー</button>
       <p id="shouri">勝ち</p>
+    </div>
+
   </div>
 
   <script src="main.js"></script>
